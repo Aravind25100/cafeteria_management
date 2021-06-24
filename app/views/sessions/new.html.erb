@@ -1,0 +1,11 @@
+<h1>Sign in</h1>
+
+<%= form_with url:new_sessions_path do |form| %>
+   <div class="formSection">
+      <%= form.email_field :email, class: "formInut",placeholder: "Email"  %>
+   </div>
+   <div class="formSection">
+      <%= form.password_field :password, class: "formInut",placeholder: "Password"  %>
+   </div>
+   <%= form.submit "Sign in" %>
+<% end %>

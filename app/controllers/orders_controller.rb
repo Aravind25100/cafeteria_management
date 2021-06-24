@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
   def index
-    render plain: "welcome to order page"
+    render "index"
   end
 end

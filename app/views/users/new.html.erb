@@ -1,0 +1,23 @@
+<h1>Create account here</h1>
+
+<%= form_with url:users_path do |form| %>
+   <div class="formSection">
+      <%= form.text_field :name, class: "formInput",placeholder: "Name"  %>
+   </div>
+   <div class="formSection">
+      <%= hidden_field_tag("role",role, class: "formInut")%>
+   </div>
+   <div class="formSection">
+      <%= form.text_area :address, class: "formInput", placeholder: "Address",rows: 3%>
+   </div>
+   <div class="formSection">
+      <%= form.telephone_field :phone_no, class: "formInput", placeholder: "Phone number"%>
+   </div>
+   <div class="formSection">
+      <%= form.email_field :email, class: "formInut",placeholder: "Email"  %>
+   </div>
+<div class="formSection">
+      <%= form.password_field :password, class: "formInut",placeholder: "Password"  %>
+   </div>
+   <%= form.submit "Sign up" %>
+<% end %>

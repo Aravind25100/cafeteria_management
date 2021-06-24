@@ -1,0 +1,6 @@
+<h1>Order details</h1>
+
+<% Order.cart_to_order(params[:cart_id]).all.each do |item| %>
+    <%= item.menu_item_name %>
+    <%= item.menu_item_price%>
+<% end %>

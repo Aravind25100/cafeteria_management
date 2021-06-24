@@ -1,6 +1,6 @@
 class MenuItemsController < ApplicationController
   def index
-    render plain: "Items page"
+    render "index"
   end
 
   def show
