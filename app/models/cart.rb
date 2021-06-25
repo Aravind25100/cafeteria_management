@@ -3,6 +3,11 @@ class Cart < ActiveRecord::Base
   belongs_to :user
 
   def self.cart_details(id)
-    Cart.find_by(user_id: id).cart_items
+    cart = Cart.find_by(user_id: id)
+    if cart
+      cart.cart_items
+    else
+      nil
+    end
   end
 end
