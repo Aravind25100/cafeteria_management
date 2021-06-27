@@ -1,0 +1,28 @@
+<h1>Menu</h1>
+<h1><%= @current_user.name %></h1>
+<article class="MenuPage" style="display:flex;justify-content:space-between;">
+   <section class ="Menucategories">
+      <%= render partial: "menu_items/menu_category" %>
+   </section>
+   <section class="menu" style="width:400px">
+       <% if category != nil%>
+          <%= render partial: "menu_items",locals:{category:MenuCategory.menu_items(category)}%>
+       <% else %>
+          <%= render partial: "menu_items",locals:{category:MenuCategory.menu_items(category)}%>
+       <% end %>
+   </section>
+   <section class="cart" style="border:1px solid black;max-height:500px;width:400px;">
+      <h1>Cart</h1>
+      <% if cartItems.present? %>
+         <div class="cartscroll" style="height:150px;overflow-x: hidden;overflow-y: auto;text-align:justify;">
+            <div>
+               <% cartItems.all.each do |items| %>
+                  <%= items.menu_item_name%> | <%=items.quantity %>| ₹<%= items.menu_item_price %><br/>
+               <% end %>
+            </div>
+         </div>
+         <p>Total amount : ₹<%= total_amount%></p>
+         <%= link_to "Checkout",orders_path(:cart_id => Cart.find_by(user_id: @current_user.id).id),method: :get%>
+      <% end %>
+   </section>
+</article>

@@ -4,7 +4,12 @@ module CartItemHelper
   end
 
   def cartItem_ids
-    cartItems.map { |item| item.menu_item_id }
+    items = cartItems
+    if items
+      cartItems.map { |item| item.menu_item_id }
+    else
+      nil
+    end
   end
 
   def total_amount

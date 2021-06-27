@@ -13,7 +13,7 @@ class CartItemsController < ApplicationController
       menu_item_price: item_price,
       quantity: 1,
     )
-    redirect_to menu_items_path
+    redirect_to menu_index_path
   end
 
   def update
@@ -30,6 +30,6 @@ class CartItemsController < ApplicationController
         item.destroy
       end
     end
-    redirect_to menu_items_path
+    redirect_to menu_index_path
   end
 end

@@ -1,0 +1,6 @@
+<%= link_to "All", menu_index_path(category:"all"),method: :get%><br>
+<% MenuCategory.all.each do |category|%>
+  <div>
+     <%= link_to category.name , menu_index_path(category:category.id),method: :get %>
+  </div>
+<% end %>

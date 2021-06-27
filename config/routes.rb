@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :users
   resources :carts
   resources :orders
+  resources :menu
 
   get "/cartitem", to: "cart_items#create", as: :new_cart_items
   post "/cartitem", to: "cart_items#create", as: :cart_items

@@ -1,0 +1,21 @@
+<% category.all.each do |category| %>
+  <% category.menu_items.all.each do |item|%>
+    <div class="menuItem" style="display:flex;justify-content:space-between;align-items:center;border:1px solid black;">
+        <div class="ItemDetails">
+          <p class="MenuItemName"><%= item.name%></p>
+          <p  class="MenuItemDescription"><%= item.description %></p>
+          <p  class="MenuItemPrice">₹<%= item.price %></p>
+        </div>
+        <div class="Add">
+            <% if cartItem_ids and cartItem_ids.include? item.id  %>
+              <div class="AddAndReduceItem">
+                  <%= link_to "-", update_cart_items_path(:item_id => item.id,:quantity => "decrease"), method: :put %>Add
+                  <%= link_to "+", update_cart_items_path(:item_id => item.id,:quantity =>"increase"), method: :put %>
+              </div>
+            <% else %>
+              <%= link_to "Add", carts_path(:item_id => item.id), method: :post %>
+            <% end %>
+        </div>
+    </div>
+  <% end %>
+<% end %>
