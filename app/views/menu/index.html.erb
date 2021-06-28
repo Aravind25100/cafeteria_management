@@ -2,14 +2,10 @@
 <h1><%= @current_user.name %></h1>
 <article class="MenuPage" style="display:flex;justify-content:space-between;">
    <section class ="Menucategories">
-      <%= render partial: "menu_items/menu_category" %>
+      <%= render partial: "menu_category" %>
    </section>
    <section class="menu" style="width:400px">
-       <% if category != nil%>
-          <%= render partial: "menu_items",locals:{category:MenuCategory.menu_items(category)}%>
-       <% else %>
-          <%= render partial: "menu_items",locals:{category:MenuCategory.menu_items(category)}%>
-       <% end %>
+      <%= render partial: "menu_items",locals:{category:MenuCategory.menu_items(category)}%>
    </section>
    <section class="cart" style="border:1px solid black;max-height:500px;width:400px;">
       <h1>Cart</h1>
@@ -22,7 +18,7 @@
             </div>
          </div>
          <p>Total amount : ₹<%= total_amount%></p>
-         <%= link_to "Checkout",orders_path(:cart_id => Cart.find_by(user_id: @current_user.id).id),method: :get%>
+         <%= link_to "Checkout",orders_path(:cart_id => Cart.find_by(user_id: @current_user.id).id),method: :post%>
       <% end %>
    </section>
 </article>

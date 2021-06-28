@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   resources :orders
   resources :menu
 
-  get "/cartitem", to: "cart_items#create", as: :new_cart_items
-  post "/cartitem", to: "cart_items#create", as: :cart_items
+  get "/orderitem", to: "order_items#create", as: :order_items
+
+  get "/cartitem", to: "cart_items#create", as: :cart_items
   put "cartitems/id", to: "cart_items#update", as: :update_cart_items
 
   root to: "home#index"

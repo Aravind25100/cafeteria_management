@@ -23,11 +23,13 @@ class CartItemsController < ApplicationController
       item.quantity = item.quantity + 1
       item.save!
     elsif params[:quantity] == "decrease"
-      if item.quantity > 1
-        item.quantity = item.quantity - 1
-        item.save!
-      else
-        item.destroy
+      if item != nil
+        if item.quantity > 1
+          item.quantity = item.quantity - 1
+          item.save!
+        else
+          item.destroy
+        end
       end
     end
     redirect_to menu_index_path

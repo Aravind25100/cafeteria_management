@@ -1,0 +1,54 @@
+<%MenuCategory.where(id:category_id).all.each do |category|%>
+    <div style="display:flex;">
+      <h1><%= category.name %></h1>
+      <p style="margin-left:20px;max-width:fit-content" onclick="displayItems('<%=category.name%>')"> + </p>
+    </div>
+    <div>
+      <table class="table table-bordered" style="width:100%">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Item name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            <%= form_with url:menu_items_path, method: :post do |form| %>
+              <tr id="display<%=category.name%>" style="display:none">
+                  <td><%= form.text_field :name, class: "formInput",placeholder: "Food Name"  %></td>
+                  <%= hidden_field_tag(:menu_category_id,category.id, class: "formInut")%>
+                  <td><%= form.text_field :description, class: "formInput",placeholder: "Description"  %></td>
+                  <td><%= form.number_field :price,class: "formInput",placeholder: "Price",:step => "0.01"%></td>
+                  <td><%= form.submit "Add" %></td>
+              </tr>
+            <% end %>
+
+            <% if !category.menu_items.nil? %>
+              <% category.menu_items.all.each do |item|%>
+                <div>
+                  <tr id="<%=item.id%>">
+                    <td><%= item.name %></td>
+                    <td><%= item.description %></td>
+                    <td><%= item.price %>₹</td>
+                    <td>
+                       <span onclick="displayEdit('<%=item.id%>')"> Edit </span>
+                       <%= link_to "Delete","/menu_items/#{item.id}",method: :delete %>
+                    </td>
+                  </tr>
+                  <%= form_with url:"/menu_items/#{item.id}", method: :put do |form| %>
+                    <tr id="displayEdit<%=item.id%>" style="display:none">
+                      <td><%= form.text_field :name, class: "formInput",placeholder: item.name%></td>
+                      <%= hidden_field_tag(:menu_category_id,category.id, class: "formInut")%>
+                      <td><%= form.text_field :description, class: "formInput",placeholder: item.description  %></td>
+                      <td><%= form.number_field :price,class: "formInput",placeholder: item.price, :step => "0.01"%></td>
+                      <td><%= form.submit "edit" %></td>
+                    </tr>
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
+        </tbody>
+      </table>
+    </div>
+<% end %>

@@ -1,0 +1,38 @@
+<div style="display:flex;">
+    <h1>Menu</h1>
+    <p style="margin-left:50px;width:50px" onclick="displayItems('')"> + </p>
+</div>
+
+<table class="table table-bordered" style="width:100%">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Category name</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+      <%= form_with url:menu_categories_path, method: :post do |form| %>
+        <tr id="display" style="display:none">
+            <td><%= form.text_field :name, class: "formInput",placeholder: "Menu category" %></td>
+            <td><%= form.submit "Create" %></td>
+        </tr>
+      <% end %>
+      <% MenuCategory.all.each do |category|%>
+        <div>
+          <tr id="<%=category.id%>">
+            <td><%= category.name %></td>
+            <td>
+              <span onclick="displayEdit('<%=category.id%>')"> Edit </span>
+              <%= link_to "Delete","/menu_categories/#{category.id}",method: :delete %>
+            </td>
+          </tr>
+        </div>
+        <%= form_with url:"/menu_categories/#{category.id}", method: :put do |form| %>
+           <tr id="displayEdit<%=category.id%>" style="display:none">
+             <td><%= form.text_field :name, class: "formInput",placeholder: category.name%></td>
+             <td><%= form.submit "edit" %></td>
+           </tr>
+        <% end %>
+      <% end %>
+  </tbody>
+</table>

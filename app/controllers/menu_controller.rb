@@ -1,5 +1,6 @@
 class MenuController < ApplicationController
   def index
+    session[:edit_category] = nil
     if session[:category] == nil
       session[:category] = "all"
     elsif params[:category].present?

@@ -21,4 +21,23 @@ class MenuItemsController < ApplicationController
       redirect_to menu_categories_path
     end
   end
+
+  def update
+    item = MenuItem.find(params[:id])
+    item.name = params[:name].present? ? params[:name] : item.name
+    item.description = params[:description].present? ? params[:description] : item.description
+    item.price = params[:price].present? ? params[:price] : item.price
+
+    if item.save
+      redirect_to menu_categories_path
+    else
+      flash[:error] = item.errors.full_messages.join(", ")
+      redirect_to menu_categories_path
+    end
+  end
+
+  def destroy
+    MenuItem.find(params[:id]).destroy
+    redirect_to menu_categories_path
+  end
 end

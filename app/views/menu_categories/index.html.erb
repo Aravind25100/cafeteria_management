@@ -1,56 +1,39 @@
 <div style="display:flex;">
-    <h1>Menu</h1>
-    <p style="width:50px" onclick="myFunction('')"> Add </p>
+  <section style="width:100px">
+      <%= link_to "All categories", menu_categories_path(category:"all"),method: :get%><br>
+      <%MenuCategory.all.each do |category|%>
+        <div>
+          <%= link_to category.name , menu_categories_path(category:category.id),method: :get %>
+        </div>
+      <% end %>
+  </section>
+  <section class="menu">
+      <% if category == "all" %>
+            <%= render partial: "categories" %>
+      <% else %>
+          <%= render partial: "edit_menu_items",locals:{category_id:MenuCategory.menu_items(category)}%>
+      <% end %>
+  </section>
 </div>
-
-<div id="myDIV" style="display:none">
-    <%= form_with url:menu_categories_path, method: :post do |form| %>
-      <div class="formSection">
-          <%= form.text_field :name, class: "formInput",placeholder: "Menu category"  %>
-      </div>
-      <%= form.submit "create" %>
-<% end %>
-</div>
-
-<%MenuCategory.all.each do |category|%>
-    <div style="display:flex;">
-      <p><%= category.name %></p>
-      <p style="margin-left:20px;width:50px" onclick="myFunction('<%=category.name%>')"> Add </p>
-    </div>
-    <div>
-          <% if !category.menu_items.nil? %>
-            <% category.menu_items.all.each do |item|%>
-              <div>
-                 <%= item.name %>
-              </div>
-            <% end %>
-          <% end %>
-    </div>
-    <div id="myDIV<%=category.name%>" style="display:none">
-        <%= form_with url:menu_items_path, method: :post do |form| %>
-          <div class="formSection">
-              <%= form.text_field :name, class: "formInput",placeholder: "Food Name"  %>
-          </div>
-          <div class="formSection">
-              <%= hidden_field_tag(:menu_category_id,category.id, class: "formInut")%>
-          </div>
-          <div class="formSection">
-              <%= form.text_field :description, class: "formInput",placeholder: "Description"  %>
-          </div>
-          <div class="formSection">
-              <%= form.number_field :price,class: "formInput",placeholder: "Price", :step => "0.01"%>
-          </div>
-          <%= form.submit "Add" %>
-        <% end %>
-    </div>
-<% end %>
 
 <script>
-function myFunction(id) {
-  console.log(id)
-  var x = document.getElementById("myDIV"+id);
+function displayItems(id) {
+  var x = document.getElementById("display"+id);
   if (x.style.display === "none") {
-    x.style.display = "block";
+    x.style.display = "table-row";
+  }else{
+    x.style.display = "none";
+  }
+}
+
+function displayEdit(id){
+  var element = document.getElementById("displayEdit"+id);
+  var hide_element = document.getElementById(id);
+  if (element.style.display == "none"){
+    element.style.display = "table-row"
+    hide_element.style.display = "none";
+  }else{
+    element.style.display = "none"
   }
 }
 </script>
