@@ -8,4 +8,12 @@ class CartsController < ApplicationController
       redirect_to cart_items_path(:item_id => params[:item_id], :cart_id => user_cart)
     end
   end
+
+  def show
+    render plain: "show cart"
+  end
+
+  def destroy
+    render plain: "destroy cart"
+  end
 end

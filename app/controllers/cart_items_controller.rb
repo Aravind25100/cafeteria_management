@@ -3,8 +3,9 @@ class CartItemsController < ApplicationController
   end
 
   def create
-    item_name = MenuItem.find(params[:item_id]).name
-    item_price = MenuItem.find(params[:item_id]).price
+    item = MenuItem.find(params[:item_id])
+    item_name = item.name
+    item_price = item.price
 
     CartItem.create!(
       cart_id: params[:cart_id],

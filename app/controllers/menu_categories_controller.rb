@@ -13,7 +13,7 @@ class MenuCategoriesController < ApplicationController
       name: params[:name],
     )
     if category.save
-      redirect_to menu_index_path
+      redirect_to menu_categories_path
     else
       flash[:error] = category.errors.full_messages.join(", ")
       redirect_to menu_categories_path
@@ -33,6 +33,7 @@ class MenuCategoriesController < ApplicationController
   end
 
   def destroy
+    MenuItem.where(menu_category_id: params[:id]).destroy_all
     MenuCategory.find(params[:id]).destroy
     redirect_to menu_categories_path
   end

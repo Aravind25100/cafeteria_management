@@ -17,7 +17,7 @@
             <td><%= form.submit "Create" %></td>
         </tr>
       <% end %>
-      <% MenuCategory.all.each do |category|%>
+      <% MenuCategory.order("name").all.each do |category|%>
         <div>
           <tr id="<%=category.id%>">
             <td><%= category.name %></td>

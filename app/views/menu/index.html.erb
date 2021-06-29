@@ -5,7 +5,7 @@
       <%= render partial: "menu_category" %>
    </section>
    <section class="menu" style="width:400px">
-      <%= render partial: "menu_items",locals:{category:MenuCategory.menu_items(category)}%>
+      <%= render partial: "menu_items",locals:{category:MenuCategory.order("name").menu_items(category)}%>
    </section>
    <section class="cart" style="border:1px solid black;max-height:500px;width:400px;">
       <h1>Cart</h1>

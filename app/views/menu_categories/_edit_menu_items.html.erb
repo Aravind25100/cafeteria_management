@@ -1,7 +1,7 @@
 <%MenuCategory.where(id:category_id).all.each do |category|%>
     <div style="display:flex;">
       <h1><%= category.name %></h1>
-      <p style="margin-left:20px;max-width:fit-content" onclick="displayItems('<%=category.name%>')"> + </p>
+      <p style="margin-left:20px;max-width:fit-content" onclick="displayItems('')"> + </p>
     </div>
     <div>
       <table class="table table-bordered" style="width:100%">
@@ -15,7 +15,7 @@
         </thead>
         <tbody>
             <%= form_with url:menu_items_path, method: :post do |form| %>
-              <tr id="display<%=category.name%>" style="display:none">
+              <tr id="display" style="display:none">
                   <td><%= form.text_field :name, class: "formInput",placeholder: "Food Name"  %></td>
                   <%= hidden_field_tag(:menu_category_id,category.id, class: "formInut")%>
                   <td><%= form.text_field :description, class: "formInput",placeholder: "Description"  %></td>

@@ -25,14 +25,8 @@
           <li class="nav-item">
             <%= link_to "Menu",menu_categories_path,class:"nav-link",method: :get %>
           </li>
-          <%# <li class="nav-item">
-            <%= link_to "users", new_user_path,class:"nav-link",method: :get %>
-          <%# </li> %>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <%= link_to "#{@current_user.name}" , edit_user_path(session[:current_user_id]),class:"btn btn-outline-success my-2 my-sm-0"%>
       </div>
     </nav>
     <% if flash[:error] %>
