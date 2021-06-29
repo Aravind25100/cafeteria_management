@@ -36,4 +36,31 @@ function displayEdit(id){
     element.style.display = "none"
   }
 }
+
+function reset(idList){
+  ids=[]
+  var id = ""
+  for(i of idList){
+    if(i.charCodeAt(0) >= 48 && i.charCodeAt(0) <= 57){
+        id += i
+    }else{
+        if(id != ""){
+          ids.push(Number(id))
+          id = ""
+        }
+    }
+  }
+
+  idList = ids
+
+  var element,hide_element;
+  for (id of idList) {
+    element = document.getElementById("displayEdit"+id);
+    hide_element = document.getElementById(id);
+    if (element.style.display == "table-row"){
+      element.style.display = "none"
+      hide_element.style.display = "table-row";
+    }
+  }
+}
 </script>

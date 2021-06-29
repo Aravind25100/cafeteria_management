@@ -26,7 +26,16 @@
             <%= link_to "Menu",menu_categories_path,class:"nav-link",method: :get %>
           </li>
         </ul>
-        <%= link_to "#{@current_user.name}" , edit_user_path(session[:current_user_id]),class:"btn btn-outline-success my-2 my-sm-0"%>
+        <div>
+           <% if @current_user %>
+              <%= link_to "Sign out" ,destroy_session_path,method: :delete,class:"btn btn-outline-danger my-2 my-sm-0"%>
+           <%end%>
+        </div>
+        <div style="margin-left:20px">
+          <% if @current_user %>
+             <%= link_to "#{@current_user.name}" , edit_user_path(session[:current_user_id]),class:"btn btn-outline-success my-2 my-sm-0"%>
+          <%end%>
+        </div>
       </div>
     </nav>
     <% if flash[:error] %>

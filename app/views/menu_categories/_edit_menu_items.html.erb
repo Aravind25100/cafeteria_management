@@ -1,7 +1,7 @@
 <%MenuCategory.where(id:category_id).all.each do |category|%>
     <div style="display:flex;">
       <h1><%= category.name %></h1>
-      <p style="margin-left:20px;max-width:fit-content" onclick="displayItems('')"> + </p>
+      <p style="margin-left:20px;max-width:fit-content" onclick="reset('<%=category.menu_items.ids%>');displayItems('')"> + </p>
     </div>
     <div>
       <table class="table table-bordered" style="width:100%">
@@ -32,7 +32,7 @@
                     <td><%= item.description %></td>
                     <td><%= item.price %>₹</td>
                     <td>
-                       <span onclick="displayEdit('<%=item.id%>')"> Edit </span>
+                       <span onclick="reset('<%=category.menu_items.ids%>');displayEdit('<%=item.id%>')"> Edit </span>
                        <%= link_to "Delete","/menu_items/#{item.id}",method: :delete %>
                     </td>
                   </tr>
