@@ -1,1 +1,7 @@
 <h1>Order details</h1>
+<% Invoice.all.each do |bill|%>
+      Order_id - <%= bill.order_id%><br>
+      user_id - <%= bill.user_id%><br>
+      total_amount - <%= bill.total_amount%><br>
+      Delivery_status - <%= bill.delivery_status%><br><br>
+<% end %>

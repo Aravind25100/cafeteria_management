@@ -13,4 +13,8 @@ class OrderItem < ActiveRecord::Base
       )
     end
   end
+
+  def self.total_amount(order_id)
+    all.where(order_id: order_id).all.map { |item| item.menu_item_price * item.quantity }.sum
+  end
 end

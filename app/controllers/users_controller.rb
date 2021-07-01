@@ -1,6 +1,15 @@
 class UsersController < ApplicationController
   skip_before_action :ensure_user_logged_in, except: %i[edit]
 
+  def index
+    if session[:employee_role] == nil
+      session[:employee_role] = "owner"
+    elsif params[:role].present?
+      session[:employee_role] = params[:role]
+    end
+    render "add_employees", locals: { employee_role: session[:employee_role] }
+  end
+
   def new
     if User.all.count == 0
       render template: "users/new", locals: { role: "owner" }
@@ -46,5 +55,10 @@ class UsersController < ApplicationController
         redirect_to menu_index_path
       end
     end
+  end
+
+  def destroy
+    User.find(params[:id]).destroy
+    redirect_to users_path
   end
 end

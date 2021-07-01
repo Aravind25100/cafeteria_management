@@ -1,7 +1,4 @@
 class CartItemsController < ApplicationController
-  def index
-  end
-
   def create
     item = MenuItem.find(params[:item_id])
     item_name = item.name
@@ -34,5 +31,10 @@ class CartItemsController < ApplicationController
       end
     end
     redirect_to menu_index_path
+  end
+
+  def destroy
+    CartItem.where(cart_id: params[:cart_id]).destroy_all
+    redirect_to invoices_path(order_id: params[:order_id])
   end
 end
