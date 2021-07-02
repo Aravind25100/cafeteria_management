@@ -1,4 +1,5 @@
-<h1><%= role %>s</h1>
+<h1>customers</h1>
+
 <table class="table table-bordered" style="width:100%">
   <thead class="thead-light">
     <tr>
@@ -6,25 +7,16 @@
       <th scope="col">Address</th>
       <th scope="col">Phone_no</th>
       <th scope="col">Email</th>
-      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
       <% User.where(role:role).all.each do |user|%>
-         <div>
            <tr>
              <td><%= user.name %></td>
              <td><%= user.address %></td>
              <td><%= user.phone_no %></td>
              <td><%= user.email %></td>
-             <td>
-                <span onclick=""> Edit </span>
-                <% if session[:current_user_id] != user.id %>
-                    <%= link_to "Delete","/users/#{user.id}",method: :delete %>
-                <% end %>
-             </td>
             </tr>
-          </div>
       <% end %>
   </tbody>
 </table>

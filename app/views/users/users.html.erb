@@ -1,0 +1,70 @@
+<article style="display:flex;">
+  <section>
+      <h1>Employees</h1>
+      <div>
+         <%= link_to "Owner",users_path(role:"owner")%>
+      </div>
+      <div>
+         <%= link_to "Clerk",users_path(role:"clerk")%>
+      </div>
+      <div>
+         <%= link_to "Customer",users_path(role:"user")%>
+      </div>
+  </section>
+  <section style="margin-left:100px">
+      <% if employee_role != "user" %>
+         <%= render partial: "employees",locals:{role:employee_role} %>
+      <% else %>
+        <%= render partial: "customers",locals:{role:employee_role} %>
+      <% end %>
+  </section>
+</article>
+
+<script>
+   function displayItems(id) {
+      var x = document.getElementById("display" + id);
+      if (x.style.display === "none") {
+         x.style.display = "table-row";
+      } else {
+         x.style.display = "none";
+      }
+   }
+
+   function displayEdit(id) {
+      var element = document.getElementById("displayEdit" + id);
+      var hide_element = document.getElementById(id);
+      if (element.style.display == "none") {
+         element.style.display = "table-row"
+         hide_element.style.display = "none";
+      } else {
+         element.style.display = "none"
+      }
+   }
+
+   function reset(idList) {
+      ids = []
+      var id = ""
+      for (i of idList) {
+         if (i.charCodeAt(0) >= 48 && i.charCodeAt(0) <= 57) {
+               id += i
+         } else {
+               if (id != "") {
+                  ids.push(Number(id))
+                  id = ""
+               }
+         }
+      }
+
+      idList = ids
+
+      var element, hide_element;
+      for (id of idList) {
+         element = document.getElementById("displayEdit" + id);
+         hide_element = document.getElementById(id);
+         if (element.style.display == "table-row") {
+               element.style.display = "none"
+               hide_element.style.display = "table-row";
+         }
+      }
+   }
+</script>

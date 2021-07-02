@@ -18,7 +18,7 @@
             </div>
          </div>
          <p>Total amount : ₹<%= total_amount%></p>
-         <%= link_to "Checkout",orders_path(:cart_id => Cart.find_by(user_id: @current_user.id).id),method: :post%>
+         <%= link_to "Checkout",menu_path(Cart.find_by(user_id:session[:current_user_id]).id),method: :get%>
       <% end %>
    </section>
 </article>

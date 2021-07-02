@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     elsif params[:role].present?
       session[:employee_role] = params[:role]
     end
-    render "add_employees", locals: { employee_role: session[:employee_role] }
+    render "users", locals: { employee_role: session[:employee_role] }
   end
 
   def new
@@ -53,6 +53,20 @@ class UsersController < ApplicationController
       else
         flash[:error] = user.errors.full_messages.join(", ")
         redirect_to menu_index_path
+      end
+    end
+  end
+
+  def change_location
+    user = User.find(session[:current_user_id])
+    if (user && user.authenticate(params[:password]))
+      user.address = params[:address].present? ? params[:address] : user.address
+      user.phone_no = params[:phone_no].present? ? params[:phone_no] : user.phone_no
+      if user.save
+        redirect_to menu_path(Cart.find_by(user_id: session[:current_user_id]).id)
+      else
+        flash[:error] = user.errors.full_messages.join(", ")
+        redirect_to menu_path(Cart.find_by(user_id: session[:current_user_id]).id)
       end
     end
   end

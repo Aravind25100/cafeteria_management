@@ -1,0 +1,32 @@
+<article >
+  <section>
+    <% user_details = User.find(session[:current_user_id]) %>
+    <div class="ChangePhoneNumber">
+      <%= form_with url: change_location_path,method: :put do |form|%>
+        <h1>Phone number : </h1>
+        <div class="form-group col-md-6">
+          <%= form.telephone_field :phone_no, class: "form-control" , placeholder: user_details.phone_no%>
+        </div>
+        <h1>Address : </h1>
+        <div class="form-group col-md-6">
+          <%= form.text_area :address, class: "form-control" , placeholder: user_details.address%>
+        </div>
+        <button class="btn btn-success" onclick="display('password')" id="changebutton">change</button>
+        <div class="form-group col-md-6" id="password" style="display:none">
+            <%= form.password_field :password, required:true, class: "form-control",placeholder: "Password"  %>
+            <%= form.submit "confirm",class:"btn btn-success" %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+  <section style="width:300px;">
+  <%= link_to "Confirm order",orders_path(:cart_id => Cart.find_by(user_id: @current_user.id).id),method: :post%>
+  </section>
+</article>
+
+<script>
+   function display(id){
+        document.getElementById("changebutton").style.display = "none"
+        document.getElementById(id).style.display = "block"
+   }
+</script>

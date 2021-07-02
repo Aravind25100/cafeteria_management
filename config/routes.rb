@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :orders
   resources :menu
 
+  put "/changelocation", to: "users#change_location", as: :change_location
+
   resources :carts
   get "deletecart", to: "carts#destroy", as: :delete_cart
 

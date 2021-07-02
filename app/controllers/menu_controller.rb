@@ -10,4 +10,8 @@ class MenuController < ApplicationController
 
     render "index", locals: { category: session[:category] }
   end
+
+  def show
+    render "confirm_order", locals: { cart_id: params[:id] }
+  end
 end
