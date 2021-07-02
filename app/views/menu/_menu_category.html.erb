@@ -1,6 +1,10 @@
-<%= link_to "All", menu_index_path(category:"all"),method: :get%><br>
-<% MenuCategory.order("name").all.each do |category|%>
-  <div>
-     <%= link_to category.name , menu_index_path(category:category.id),method: :get %>
-  </div>
-<% end %>
+<div>
+<%= link_to "All", menu_index_path(category:"all"),class:"list-group-item list-group-item-action MenuCategory",method: :get%><br>
+<div style="margin-top:-15px">
+  <% MenuCategory.order("name").all.each do |category|%>
+    <div>
+      <%= link_to category.name , menu_index_path(category:category.id),class:"list-group-item list-group-item-action MenuCategory",method: :get %>
+    </div>
+  <% end %>
+</div>
+</div>

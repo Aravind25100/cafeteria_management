@@ -1,10 +1,11 @@
+<h1 class="h1">Items</h1>
 <% category.all.each do |category| %>
   <% category.menu_items.all.each do |item|%>
-    <div class="menuItem" style="display:flex;justify-content:space-between;align-items:center;border:1px solid black;">
-        <div class="ItemDetails">
-          <p class="MenuItemName"><%= item.name%></p>
-          <p  class="MenuItemDescription"><%= item.description %></p>
-          <p  class="MenuItemPrice">₹<%= item.price %></p>
+  <div class="shadow p-4 mb-2  bg-white rounded menu-items" >
+        <div>
+          <p ><%= item.name%></p>
+          <p ><%= item.description %></p>
+          <p >₹<%= item.price %></p>
         </div>
         <div class="Add">
             <% if cartItem_ids and cartItem_ids.include? item.id  %>

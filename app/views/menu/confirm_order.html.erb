@@ -1,5 +1,5 @@
-<article >
-  <section>
+<article style="display:flex;justify-content:space-between">
+  <section style="width:500px;margin:100px auto;border:1px solid black">
     <% user_details = User.find(session[:current_user_id]) %>
     <div class="ChangePhoneNumber">
       <%= form_with url: change_location_path,method: :put do |form|%>
@@ -19,7 +19,7 @@
       <% end %>
     </div>
   </section>
-  <section style="width:300px;">
+  <section style="width:500px;margin:100px auto;border:1px solid black">
   <%= link_to "Confirm order",orders_path(:cart_id => Cart.find_by(user_id: @current_user.id).id),method: :post%>
   </section>
 </article>

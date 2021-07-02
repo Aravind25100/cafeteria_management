@@ -14,3 +14,58 @@
  *= require_tree .
  *= require_self
  */
+
+.scrollbar {
+    height: 100%;
+    width: 600px;
+    margin: 0 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
+}
+
+.scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.MenuScrollBar {
+    height: 500px;
+    width: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
+}
+
+.MenuScrollBar::-webkit-scrollbar {
+    display: none;
+}
+
+.cartscroll {
+    height: 200px;
+    width: 400px;
+    margin-right: -20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
+}
+
+.menu-items {
+    margin-left: 50px;
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.MenuCategory {
+    text-align: center;
+    background: orangered;
+    color: white;
+    border-radius: 1px;
+}
+
+.MenuCategory:hover {
+    text-decoration: none;
+    background-color: orangered;
+    color: white;
+}

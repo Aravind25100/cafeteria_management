@@ -1,24 +1,48 @@
-<h1>Menu</h1>
-<h1><%= @current_user.name %></h1>
-<article class="MenuPage" style="display:flex;justify-content:space-between;">
-   <section class ="Menucategories">
-      <%= render partial: "menu_category" %>
+<article class="MenuPage" style="display:flex;">
+   <section  style="max-width:fit-content;text-align:center;border:1px solid grey;background:orangered">
+      <div class="sticky-top MenuScrollBar">
+          <%= render partial: "menu_category" %>
+      </div>
    </section>
-   <section class="menu" style="width:400px">
+   <section class="scrollbar">
       <%= render partial: "menu_items",locals:{category:MenuCategory.order("name").menu_items(category)}%>
    </section>
-   <section class="cart" style="border:1px solid black;max-height:500px;width:400px;">
-      <h1>Cart</h1>
+   <section class="sticky-top shadow p-4 mb-2  bg-white mx-auto" style="height:500px">
+      <h1 class="h1" style="color:grey">Cart</h1>
       <% if cartItems.present? %>
-         <div class="cartscroll" style="height:150px;overflow-x: hidden;overflow-y: auto;text-align:justify;">
-            <div>
-               <% cartItems.all.each do |items| %>
-                  <%= items.menu_item_name%> | <%=items.quantity %>| ₹<%= items.menu_item_price %><br/>
-               <% end %>
+         <div class="cartscroll" >
+            <div class="mx-auto">
+                  <table class="table ">
+                     <thead>
+                        <tr>
+                           <th scope="col">Item</th>
+                           <th scope="col">quantity</th>
+                           <th scope="col">price</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <% cartItems.order("id").all.each do |items| %>
+                           <tr>
+                              <td><%= items.menu_item_name%></td>
+                              <td><%=items.quantity %></td>
+                              <td>₹<%= items.menu_item_price %></td>
+                           </tr>
+                        <% end %>
+                     </tbody>
+                  </table>
             </div>
          </div>
-         <p>Total amount : ₹<%= total_amount%></p>
-         <%= link_to "Checkout",menu_path(Cart.find_by(user_id:session[:current_user_id]).id),method: :get%>
+         <div style="display:flex;justify-content:space-between;margin:50px auto">
+            <p>Total amount : ₹</p>
+            <p style="margin-right:50px">₹<%= total_amount%></p>
+         </div>
+         <div style="width:100px;margin:0 auto">
+          <%= link_to "Checkout",menu_path(Cart.find_by(user_id:session[:current_user_id]).id),class:"btn btn-outline-danger",method: :get%>
+          </div>
+      <% else %>
+          <div>
+             <img src="empty-cart.png" style="width:300px;height:300px;margin:0 10px">
+          </div>
       <% end %>
    </section>
 </article>
