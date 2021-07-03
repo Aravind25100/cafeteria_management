@@ -1,14 +1,17 @@
-<article class="MenuPage" style="display:flex;">
+<article style="display:flex;">
+
    <section  style="max-width:fit-content;text-align:center;border:1px solid grey;background:orangered">
       <div class="sticky-top MenuScrollBar">
           <%= render partial: "menu_category" %>
       </div>
    </section>
+
    <section class="scrollbar">
       <%= render partial: "menu_items",locals:{category:MenuCategory.order("name").menu_items(category)}%>
    </section>
+
    <section class="sticky-top shadow p-4 mb-2  bg-white mx-auto" style="height:500px">
-      <h1 class="h1" style="color:grey">Cart</h1>
+      <h1 class="h1" style="color:grey;margin-bottom:50px">Cart</h1>
       <% if cartItems.present? %>
          <div class="cartscroll" >
             <div class="mx-auto">
@@ -45,4 +48,5 @@
           </div>
       <% end %>
    </section>
+
 </article>

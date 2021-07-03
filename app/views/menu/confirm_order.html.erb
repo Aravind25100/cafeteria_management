@@ -20,7 +20,9 @@
     </div>
   </section>
   <section style="width:500px;margin:100px auto;border:1px solid black">
-  <%= link_to "Confirm order",orders_path(:cart_id => Cart.find_by(user_id: @current_user.id).id),method: :post%>
+    <% if Cart.find_by(user_id: @current_user.id) %>
+        <%= link_to "Confirm order",orders_path(:cart_id => Cart.find_by(user_id: @current_user.id).id),method: :post%>
+    <% end %>
   </section>
 </article>
 

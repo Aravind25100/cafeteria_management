@@ -1,0 +1,40 @@
+<h1 class="h1" style="color:grey;margin-bottom:50px">Order Detail</h1>
+<% if invoice_id.present? %>
+  <div class="cartscroll" >
+    <div>
+      <% invoices = Invoice.find(invoice_id).order%>
+      <table class="table ">
+        <thead>
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">quantity</th>
+            <th scope="col">price</th>
+          </tr>
+        </thead>
+        <tbody>
+            <%invoices.order_items.all.each do |order_item| %>
+              <tr>
+                <td><%= order_item.menu_item_name %><br></td>
+                <td><%=order_item.quantity %></td>
+                <td>₹<%= order_item.menu_item_price %></td>
+               </tr>
+            <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <h1 class="h5">Delivery location<h1>
+  <%invoices.user.address.split(",").each do |add|%>
+    <%= add %><br>
+  <% end %>
+<% else %>
+    <div style="color:rgb(169,169,169);border:2px solid rgb(169,169,169);width:300px;height:300px;margin:0 auto">
+      <div style="width:200px;margin:0 auto">
+        <h1 class="h1"> ------ -- - ---</h1>
+        <h1 class="h1"> ------ -- - ---</h1>
+        <h1 class="h1"> ------ -- - ---</h1>
+        <h1 class="h1"> ------ -- - ---</h1>
+        <h1 class="h1"> ------ -- - ---</h1>
+      </div>
+    </div>
+<% end %>

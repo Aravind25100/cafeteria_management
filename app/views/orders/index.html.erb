@@ -1,8 +1,56 @@
-<h1>Order details</h1>
-<% Invoice.all.each do |bill|%>
-      Order_id - <%= bill.order_id%><br>
-      user_id - <%= bill.user_id%><br>
-      total_amount - <%= bill.total_amount%><br>
-      Delivery_address - <%= bill.address %><br>
-      Delivery_status - <%= bill.delivery_status%><br><br>
-<% end %>
+<article style="display:flex;" >
+
+   <section  class=" sticky-top MenuScrollBar" style="background:orangered">
+      <div style="width:200px">
+        <div>
+          <%= link_to "All orders", orders_path(:status=>"all"),class:"list-group-item OrderDetail",method: :get %>
+          <%= link_to "Pending orders", orders_path(:status=>"pending"),class:"list-group-item  OrderDetail",method: :get %>
+          <%= link_to "delivered orders", orders_path(:status=>"delivered"),class:"list-group-item  OrderDetail",method: :get %>
+        </div>
+      </div>
+   </section>
+
+   <section class="scrollbar">
+     <% Invoice.all_invoices(@current_user.id).status_wise(status).order("created_at DESC").all.each do |bill|%>
+         <%= link_to orders_path(invoice: bill.id),class:"OrderInvoice" do%>
+          <div class="card invoice">
+              <div class="card-header" style="display:flex;justify-content:space-around">
+                <p>Invoice : <%= bill.id %></p>
+                <p>Date : <%= bill.created_at.strftime("%d/%m/%Y") %></p>
+                <p>Order No : <%= bill.order_id %></p>
+              </div>
+              <div class="card-body">
+                  <table class="table">
+                  <thead>
+                     <tr>
+                     <th scope="col">Customer name</th>
+                     <th scope="col">Order amount</th>
+                     <th scope="col">order status</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td> <%= bill.user.name%></td>
+                      <td>₹<%= bill.total_amount%></td>
+                      <% if Invoice.pending_order(@current_user.id,bill.delivery_status)%>
+                        <td><%= link_to bill.delivery_status, update_invoices_path(order_id:bill.order.id),class:"btn btn-outline-danger",style:"padding:0 10px;",method: :put%></td>
+                      <% else %>
+                           <td><%= bill.delivery_status%></td>
+                      <% end %>
+                     </tr>
+                  </tbody>
+                  </table>
+              </div>
+              </div>
+          <% end %>
+      <% end %>
+   </section>
+
+   <section class="sticky-top shadow p-4 mb-2  bg-white mx-auto" style="height:500px">
+         <div style="width: 400px;">
+            <div class="mx-auto">
+                 <%= render partial: "invoice_detail",locals:{invoice_id:invoice_id} %>
+            </div>
+   </section>
+
+</article>

@@ -1,5 +1,5 @@
 <div>
-<%= link_to "All", menu_index_path(category:"all"),class:"list-group-item list-group-item-action MenuCategory",method: :get%><br>
+<%= link_to "All", menu_index_path(category:"all"),class:"list-group-item  MenuCategory",method: :get%><br>
 <div style="margin-top:-15px">
   <% MenuCategory.order("name").all.each do |category|%>
     <div>

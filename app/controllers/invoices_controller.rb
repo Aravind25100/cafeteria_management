@@ -10,4 +10,12 @@ class InvoicesController < ApplicationController
     )
     redirect_to orders_path
   end
+
+  def update
+    invoice = Invoice.find_by(order_id: params[:order_id])
+    invoice.delivery_status = "delivered"
+    invoice.updated_at = DateTime.now()
+    invoice.save
+    redirect_to orders_path
+  end
 end
