@@ -87,3 +87,9 @@ body {
     color: black;
     border-width: 2px;
 }
+
+.confirm-order {
+    background-image: url("https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/rng/md/carousel/production/gubwz8cbugdx3prtieuj");
+    background-repeat: no-repeat;
+    background-size: 100% 110%;
+}

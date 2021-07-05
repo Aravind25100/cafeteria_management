@@ -1,13 +1,13 @@
-<article style="display:flex;justify-content:space-between">
-  <section style="width:500px;margin:100px auto;border:1px solid black">
+<article style="display:flex;justify-content:space-between;background:lightgrey;">
+  <section style="width:500px;margin:50px auto;height:400px;">
     <% user_details = User.find(session[:current_user_id]) %>
-    <div class="ChangePhoneNumber">
+    <div style="width:600px;margin-top:50px;margin-left:100px">
       <%= form_with url: change_location_path,method: :put do |form|%>
-        <h1>Phone number : </h1>
+        <h1 class="h4" style="color:#282c3f">Phone number : </h1>
         <div class="form-group col-md-6">
           <%= form.telephone_field :phone_no, class: "form-control" , placeholder: user_details.phone_no%>
         </div>
-        <h1>Address : </h1>
+        <h1 class="h4" style="color:#282c3f;">Address : </h1>
         <div class="form-group col-md-6">
           <%= form.text_area :address, class: "form-control" , placeholder: user_details.address%>
         </div>
@@ -19,10 +19,30 @@
       <% end %>
     </div>
   </section>
-  <section style="width:500px;margin:100px auto;border:1px solid black">
-    <% if Cart.find_by(user_id: @current_user.id) %>
-        <%= link_to "Confirm order",orders_path(:cart_id => Cart.find_by(user_id: @current_user.id).id),method: :post%>
-    <% end %>
+  <section class="shadow-lg p-3 mb-5 bg-white " style="width:500px;margin:50px auto;height:400px;border:1px solid black;">
+    <div style="width:50px;margin:-30px 0 0 -30px;height:50px;background:#282c3f"></div>
+    <div style="width:300px;margin:0 auto;height:300px;">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>Confirm to place your order! </strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div style="margin-top:20px;margin-left:-10px">
+      <h1 class="h5">Delivery location :</h1>
+      <p style="margin:10px 10px"><%= user_details.address %></p>
+    </div>
+    <div style="margin-top:20px;margin-left:-10px">
+      <h1 class="h5">Total amount : <%= 1334 %></h1>
+    </div>
+
+    <div style="margin-top:20px;display:flex;justify-content:space-between">
+       <%= link_to "cancel order ",menu_index_path,class:"btn btn-outline-danger",method: :get%>
+       <% if Cart.find_by(user_id: @current_user.id) %>
+          <%= link_to "Confirm order ",orders_path(:cart_id => Cart.find_by(user_id: @current_user.id).id),class:"btn btn-outline-success",method: :post%>
+       <% end %>
+    </div>
+    <div>
   </section>
 </article>
 

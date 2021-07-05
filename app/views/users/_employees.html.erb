@@ -1,4 +1,5 @@
-<h1><%= role %>s</h1>
+<span class="h3"><%= role.capitalize %>s</span>
+<%= link_to "+" ,add_employees_path(role:role),style:"margin-left:40px;font-weight:600;color:black;font-size:20px",method: :get %>
 <table class="table table-bordered" style="width:100%">
   <thead class="thead-light">
     <tr>
@@ -18,10 +19,9 @@
              <td><%= user.phone_no %></td>
              <td><%= user.email %></td>
              <td>
-                <span onclick=""> Edit </span>
-                <% if session[:current_user_id] != user.id %>
-                    <%= link_to "Delete","/users/#{user.id}",method: :delete %>
-                <% end %>
+  <%# post "/edit_employees", to: "users#update_employee", as: :update_employees %>
+                <%= link_to "Edit", edit_employees_path(user_id:user.id) %>
+                <%= link_to "Delete","/users/#{user.id}",method: :delete %>
              </td>
             </tr>
           </div>

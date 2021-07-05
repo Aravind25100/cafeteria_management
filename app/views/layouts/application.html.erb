@@ -17,22 +17,24 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <% if User.is_admin(session[:current_user_id]) %>
-           <h1 class="navbar-brand">Food City</h1>
+        <% if @current_user && User.is_admin(session[:current_user_id]) %>
+           <%= link_to "Food City",orders_path,class:"navbar-brand" %>
         <% else %>
            <%= link_to "Food City",menu_index_path,class:"navbar-brand",method: :get %>
         <% end %>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item">
-            <%= link_to "Orders", orders_path,class:"nav-link",method: :get %>
-          </li>
-          <% if User.is_admin(session[:current_user_id]) %>
-              <li class="nav-item">
-                <%= link_to "Menu",menu_categories_path,class:"nav-link",method: :get %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "Employees",users_path,class:"nav-link",method: :get %>
-              </li>
+          <% if @current_user %>
+            <li class="nav-item">
+              <%= link_to "Orders", orders_path,class:"nav-link",method: :get %>
+            </li>
+            <%if User.is_admin(session[:current_user_id]) %>
+                <li class="nav-item">
+                  <%= link_to "Menu",menu_categories_path,class:"nav-link",method: :get %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "Employees",users_path,class:"nav-link",method: :get %>
+                </li>
+            <% end %>
           <% end %>
         </ul>
         <% if @current_user %>
@@ -46,9 +48,9 @@
       </div>
     </nav>
     <% if flash[:error] %>
-      <p class="FlashError">
+      <div class="alert alert-danger" role="alert">
         <%= flash[:error] %>
-      </p>
+        </div>
     <% end %>
     <%= yield %>
   </body>

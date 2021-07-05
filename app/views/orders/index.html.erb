@@ -35,7 +35,7 @@
                       <% if Invoice.pending_order(@current_user.id,bill.delivery_status)%>
                         <td><%= link_to bill.delivery_status, update_invoices_path(order_id:bill.order.id),class:"btn btn-outline-danger",style:"padding:0 10px;",method: :put%></td>
                       <% else %>
-                           <td><%= bill.delivery_status%></td>
+                           <td><button class="btn btn-outline-danger"style="padding:0 10px;"  disabled><%= bill.delivery_status%></button></td>
                       <% end %>
                      </tr>
                   </tbody>

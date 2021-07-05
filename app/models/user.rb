@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
 
   def self.is_admin(user_id)
     user = User.find(user_id)
-    user.role == "owner"
+    if user.role == "owner"
+      true
+    else
+      false
+    end
   end
 end

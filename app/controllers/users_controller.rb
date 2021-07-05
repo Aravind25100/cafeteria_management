@@ -36,6 +36,46 @@ class UsersController < ApplicationController
     end
   end
 
+  def add_employees
+    render "users/add_employee", locals: { role: params[:role] }
+  end
+
+  def create_employee
+    user = User.new(
+      name: params[:name],
+      role: params[:role],
+      address: (params[:address].split(",").map(&:strip).join(",")),
+      phone_no: params[:phone_no],
+      email: params[:email],
+      password: params[:password],
+    )
+    if user.save
+      redirect_to users_path
+    else
+      flash[:error] = user.errors.full_messages.join(", ")
+      redirect_to add_employees_path
+    end
+  end
+
+  def edit_employees
+    render "edit_employee", locals: { employee_id: params[:user_id] }
+  end
+
+  def update_employees
+    user = User.find(params[:employee_id])
+    user.name = params[:name].present? ? params[:name] : user.name
+    user.address = params[:address].present? ? params[:address] : user.address
+    user.phone_no = params[:phone_no].present? ? params[:phone_no] : user.phone_no
+    user.email = params[:email].present? ? params[:phone_no] : user.email
+
+    if user.save
+      redirect_to users_path
+    else
+      flash[:error] = user.errors.full_messages.join(", ")
+      redirect_to edit_employees_path
+    end
+  end
+
   def edit
     render "edit", locals: { user_id: session[:current_user_id] }
   end

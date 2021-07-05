@@ -3,9 +3,14 @@ Rails.application.routes.draw do
 
   resources :menu_items
   resources :menu_categories
-  resources :users
   resources :orders
   resources :menu
+
+  resources :users
+  get "/add_employees", to: "users#add_employees", as: :add_employees
+  post "/add_employees", to: "users#create_employee", as: :create_employees
+  get "/edit", to: "users#edit_employees", as: :edit_employees
+  put "/edit_employees", to: "users#update_employees", as: :update_employees
 
   put "/changelocation", to: "users#change_location", as: :change_location
 
