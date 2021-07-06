@@ -1,21 +1,83 @@
-<h1>Edit profile</h1>
-<%= form_with url: user_path(user_id),method: :put  do |form|%>
-<div class="form-group">
-    <div class="form-group col-md-6">
-        <%= form.text_field :name,autofocus:true,class: "form-control",placeholder: "Name"  %>
+<div style="width:100%;height:100%;background:#23272a">
+  <div style="width:700px;height:400px;margin:0 auto;border:1px solid black;background:#2c2f33">
+    <% user = User.find(user_id) %>
+    <div style="display:flex;justify-content:space-around;margin-top:5%;align-items:center;color:white">
+       <div >
+           <h1 class="h2">Your details:</h1>
+            <p style="margin:5% 10%"><%=user.name%></p>
+            <p style="margin:5% 10%"><%=user.email%></p>
+            <p style="margin:5% 10%"><%=user.address%></p>
+       </div>
+       <button type="button" class="btn btn-danger" style="padding:8px 30px" data-toggle="modal" data-target="#ChangeDetails">Change details</button>
     </div>
-    <div class="form-group col-md-6">
-        <%= form.text_area :address, class: "form-control", placeholder: "Address",rows: 3%>
+    <div style="display:flex;justify-content:space-around;align-items:center;margin-top:10%;color:white">
+        <span style="padding:2% 5%;border:1px solid #99aab5;border-radius:4px">••••••••••••••••••••</span>
+        <button type="button" class="btn btn-danger" style= "padding:8px 30px" data-toggle="modal" data-target="#ChangePassword">Change password</button>
     </div>
-    <div class="form-group col-md-6">
-        <%= form.telephone_field :phone_no, class: "form-control", placeholder: "Phone number"%>
+
+    <div class="modal fade" id="ChangeDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Edit profile</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <%= form_with url: user_path(user_id),method: :put  do |form|%>
+            <div class="modal-body" style="margin-left:50px">
+                    <div class="form-group">
+                        <div class="form-group col-md-10">
+                            <%= form.text_field :name,autofocus:true,class: "form-control",placeholder: "Name"  %>
+                        </div>
+                        <div class="form-group col-md-10">
+                            <%= form.text_area :address, class: "form-control", placeholder: "Address",rows: 3%>
+                        </div>
+                        <div class="form-group col-md-10">
+                            <%= form.telephone_field :phone_no, class: "form-control", placeholder: "Phone number"%>
+                        </div>
+                        <div class="form-group col-md-10">
+                            <%= form.email_field :email, class: "form-control",placeholder: "Email"  %>
+                        </div>
+                        <div class="form-group col-md-10">
+                            <%= form.password_field :password,required:true,class: "form-control",placeholder: "Password"  %>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <%= form.submit "Edit",class:"btn btn-success",style:"padding:5px 50px"%>
+            </div>
+            <% end %>
+        </div>
     </div>
-    <div class="form-group col-md-6">
-        <%= form.email_field :email, class: "form-control",placeholder: "Email"  %>
     </div>
-  <div class="form-group col-md-6">
-        <%= form.password_field :password,required:true,class: "form-control",placeholder: "Password"  %>
-  </div>
-  <%= form.submit "Ok",class:"btn btn-success"%>
+
+    <div class="modal fade" id="ChangePassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Change password</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <%= form_with url: user_path(user_id),method: :put  do |form|%>
+            <div class="modal-body" style="margin-left:50px">
+                    <div class="form-group">
+                        <div class="form-group col-md-10">
+                            <%= form.password_field :previous_password,required:true,autofocus:true,class: "form-control",placeholder: "Current password"%>
+                        </div>
+                        <div class="form-group col-md-10">
+                            <%= form.password_field :new_password,required:true,class: "form-control",placeholder: "New password"%>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <%= form.submit "Edit", class:"btn btn-success",style:"padding:5px 50px"%>
+            </div>
+            <% end %>
+        </div>
+    </div>
+    </div>
 </div>
-<% end %>
+</div>

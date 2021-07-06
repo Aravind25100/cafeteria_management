@@ -3,18 +3,22 @@
   <% category.menu_items.all.each do |item|%>
   <div class="shadow p-4 mb-2  bg-white rounded menu-items" >
         <div>
-          <p ><%= item.name%></p>
-          <p ><%= item.description %></p>
-          <p >₹<%= item.price %></p>
+          <h4 class="h4"><%= item.name%></h4>
+          <p style="font-weight:600;color:grey"><%= item.description %></p>
+          <p style="margin-top:5px">₹<%= item.price %></p>
         </div>
-        <div class="Add">
-            <% if cartItem_ids and cartItem_ids.include? item.id  %>
-              <div class="AddAndReduceItem">
-                  <%= link_to "-", update_cart_items_path(:item_id => item.id,:quantity => "decrease"), method: :put %>Add
-                  <%= link_to "+", update_cart_items_path(:item_id => item.id,:quantity =>"increase"), method: :put %>
-              </div>
+        <div>
+            <% if category.status == "active" %>
+              <% if cartItem_ids and cartItem_ids.include? item.id  %>
+                <div class="btn btn-light" style="padding:3px 20px;background:lightgrey">
+                    <%= link_to "-", update_cart_items_path(:item_id => item.id,:quantity => "decrease"),style:"margin-right:5px;text-decoration:none;color:red", method: :put %>Add
+                    <%= link_to "+", update_cart_items_path(:item_id => item.id,:quantity =>"increase"),style:"margin-left:5px;text-decoration:none;color:green", method: :put %>
+                </div>
+              <% else %>
+                <%= link_to "Add", carts_path(:item_id => item.id),class:"btn btn-success",style:"padding:3px 20px", method: :post %>
+              <% end %>
             <% else %>
-              <%= link_to "Add", carts_path(:item_id => item.id), method: :post %>
+               <button class="btn btn-danger" disabled>Item is unavailable</button>
             <% end %>
         </div>
     </div>

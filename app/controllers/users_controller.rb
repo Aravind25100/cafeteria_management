@@ -87,12 +87,16 @@ class UsersController < ApplicationController
       user.address = params[:address].present? ? params[:address] : user.address
       user.phone_no = params[:phone_no].present? ? params[:phone_no] : user.phone_no
       user.email = params[:email].present? ? params[:phone_no] : user.email
-
+      if params[:previous_password].present?
+        if user && user.authenticate(params[:previous_password])
+          user.password_digest = params[:new_password]
+        end
+      end
       if user.save
-        redirect_to menu_index_path
+        redirect_to edit_user_path(session[:current_user_id])
       else
         flash[:error] = user.errors.full_messages.join(", ")
-        redirect_to menu_index_path
+        redirect_to edit_user_path(session[:current_user_id])
       end
     end
   end

@@ -3,7 +3,7 @@
     <p style="margin-left:50px;width:50px" onclick="reset('<%=MenuCategory.ids%>');displayItems('')"> + </p>
 </div>
 
-<table class="table table-bordered" style="width:100%">
+<table class="table table-bordered " style="width:100%;">
   <thead class="thead-light">
     <tr>
       <th scope="col">Category name</th>
@@ -21,9 +21,12 @@
         <div>
           <tr id="<%=category.id%>">
             <td><%= category.name %></td>
-            <td>
-              <span onclick="reset('<%=MenuCategory.ids%>');displayEdit('<%=category.id%>')"> Edit </span>
-              <%= link_to "Delete","/menu_categories/#{category.id}",method: :delete %>
+            <td style="display:flex;align-items:center;justify-content:space-between;width:150px">
+              <span onclick="reset('<%=MenuCategory.ids%>');displayEdit('<%=category.id%>')" style="cursor:pointer"> Edit </span>
+              <%= form_with(url: "/menu_categories/#{category.id}",style:"margin-left:10px;", method: "DELETE") do %>
+                <%= image_submit_tag("delete.png",style:"width:20px",:onclick=>"this.form.submit()") %>
+              <% end %>
+              <%= link_to category.status,menu_category_path(id:category.id,status:category.status),class:"btn btn-danger",style:"margin-left:10px;padding:0 10px;", method: :put%>
             </td>
           </tr>
         </div>
@@ -33,6 +36,7 @@
              <td><%= form.submit "edit" %></td>
            </tr>
         <% end %>
+
       <% end %>
   </tbody>
 </table>

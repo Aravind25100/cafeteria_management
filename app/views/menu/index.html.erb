@@ -15,24 +15,24 @@
       <% if cartItems.present? %>
          <div class="cartscroll" >
             <div class="mx-auto">
-                  <table class="table ">
-                     <thead>
+               <table class="table ">
+                  <thead>
+                     <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">quantity</th>
+                        <th scope="col">price</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <% cartItems.order("id").all.each do |items| %>
                         <tr>
-                           <th scope="col">Item</th>
-                           <th scope="col">quantity</th>
-                           <th scope="col">price</th>
+                           <td><%= items.menu_item_name%></td>
+                           <td><%=items.quantity %></td>
+                           <td>₹<%= items.menu_item_price %></td>
                         </tr>
-                     </thead>
-                     <tbody>
-                        <% cartItems.order("id").all.each do |items| %>
-                           <tr>
-                              <td><%= items.menu_item_name%></td>
-                              <td><%=items.quantity %></td>
-                              <td>₹<%= items.menu_item_price %></td>
-                           </tr>
-                        <% end %>
-                     </tbody>
-                  </table>
+                     <% end %>
+                  </tbody>
+               </table>
             </div>
          </div>
          <div style="display:flex;justify-content:space-between;margin:50px auto">
