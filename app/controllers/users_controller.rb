@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :ensure_user_logged_in, except: %i[edit]
+  skip_before_action :ensure_user_logged_in, except: [:edit, :index]
 
   def index
     if session[:employee_role] == nil
@@ -87,10 +87,8 @@ class UsersController < ApplicationController
       user.address = params[:address].present? ? params[:address] : user.address
       user.phone_no = params[:phone_no].present? ? params[:phone_no] : user.phone_no
       user.email = params[:email].present? ? params[:phone_no] : user.email
-      if params[:previous_password].present?
-        if user && user.authenticate(params[:previous_password])
-          user.password_digest = params[:new_password]
-        end
+      if params[:new_password].present?
+        user.password_digest = params[:new_password]
       end
       if user.save
         redirect_to edit_user_path(session[:current_user_id])
