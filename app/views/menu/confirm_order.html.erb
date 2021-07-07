@@ -33,7 +33,9 @@
       <p style="margin:10px 10px"><%= user_details.address %></p>
     </div>
     <div style="margin-top:20px;margin-left:-10px">
-      <h1 class="h5">Total amount : <%= 1334 %></h1>
+         <%if Cart.find_by(user_id:@current_user.id)%>
+            <h1 class="h5">Total amount : <%= Cart.find_by(user_id:@current_user.id).cart_items.sum("quantity * menu_item_price") %></h1>
+          <% end %>
     </div>
 
     <div style="margin-top:20px;display:flex;justify-content:space-between">

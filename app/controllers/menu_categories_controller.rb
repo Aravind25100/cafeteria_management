@@ -11,6 +11,7 @@ class MenuCategoriesController < ApplicationController
   def create
     category = MenuCategory.new(
       name: params[:name],
+      status: "active",
     )
     if category.save
       redirect_to menu_categories_path
