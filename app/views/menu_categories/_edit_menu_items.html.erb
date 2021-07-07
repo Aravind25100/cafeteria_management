@@ -1,16 +1,16 @@
 <%MenuCategory.where(id:category_id).all.each do |category|%>
-    <div style="display:flex;">
-      <h1><%= category.name %></h1>
-      <p style="margin-left:20px;max-width:fit-content" onclick="reset('<%=category.menu_items.ids%>');displayItems('')"> + </p>
+    <div style="display:flex;align-items:center">
+      <h1 class="h2"><%= category.name %></h1>
+      <p class="h2" style="margin-left:20px;max-width:fit-content;cursor:pointer;color:orangered" onclick="reset('<%=category.menu_items.ids%>');displayItems('')"> + </p>
     </div>
     <div>
-      <table class="table table-bordered" style="width:100%">
+      <table class="table table-borderless" style="width:100%;margin-top:3%;margin-left:3%">
         <thead class="thead-light">
           <tr>
-            <th scope="col">Item name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Price</th>
-            <th scope="col">Actions</th>
+            <th scope="col" style="width:200px">Item name</th>
+            <th scope="col" style="width:200px">Description</th>
+            <th scope="col" style="width:200px">Price</th>
+            <th scope="col" style="width:200px">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -31,9 +31,11 @@
                     <td><%= item.name %></td>
                     <td><%= item.description %></td>
                     <td><%= item.price %>₹</td>
-                    <td>
-                       <span onclick="reset('<%=category.menu_items.ids%>');displayEdit('<%=item.id%>')"> Edit </span>
-                       <%= link_to "Delete","/menu_items/#{item.id}",method: :delete %>
+                    <td style="display:flex;justify-content:space-around;align-items:center">
+                       <span onclick="reset('<%=category.menu_items.ids%>');displayEdit('<%=item.id%>')" style="cursor:pointer;height:30px;padding:2px 20px" class="btn btn-dark"> Edit </span>
+                        <%= form_with(url: "//menu_items/#{item.id}",style:"margin-left:10px;", method: "DELETE") do %>
+                          <%= image_submit_tag("delete.png",style:"width:20px",:onclick=>"this.form.submit()") %>
+                        <% end %>
                     </td>
                   </tr>
                   <%= form_with url:"/menu_items/#{item.id}", method: :put do |form| %>

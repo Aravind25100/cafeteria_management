@@ -42,7 +42,11 @@
               <%= link_to "Sign out" ,destroy_session_path,method: :delete,class:"btn btn-outline-danger my-2 my-sm-0"%>
           </div>
           <div style="margin-left:20px">
-              <%= link_to "#{@current_user.name}" , edit_user_path(session[:current_user_id]),class:"btn btn-outline-success my-2 my-sm-0"%>
+            <% if @current_user.role == "user" %>
+                  <%= link_to "#{@current_user.name}" , edit_user_path(session[:current_user_id]),class:"btn btn-outline-success my-2 my-sm-0"%>
+            <% else %>
+                  <button class="btn btn-outline-success "><%=@current_user.name%> </button>
+            <% end %>
           </div>
         <%end%>
       </div>

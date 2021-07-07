@@ -1,13 +1,13 @@
-<div style="display:flex;">
-    <h1>Menu</h1>
-    <p style="margin-left:50px;width:50px" onclick="reset('<%=MenuCategory.ids%>');displayItems('')"> + </p>
+<div style="display:flex;align-items:center">
+    <h1 class="h2">Menu</h1>
+    <p style="margin-left:20px;cursor:pointer;padding:0 12px;color:orangered" onclick="reset('<%=MenuCategory.ids%>');displayItems('')" class="h2"> + </p>
 </div>
 
-<table class="table table-bordered " style="width:100%;">
+<table class="table table-borderless " style="width:100%;margin-top:5%;margin-left:5%">
   <thead class="thead-light">
-    <tr>
-      <th scope="col">Category name</th>
-      <th scope="col">Actions</th>
+    <tr >
+      <th scope="col" style="width:200px">Category name</th>
+      <th scope="col" style="width:200px" >Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -18,18 +18,16 @@
         </tr>
       <% end %>
       <% MenuCategory.order("name").all.each do |category|%>
-        <div>
           <tr id="<%=category.id%>">
             <td><%= category.name %></td>
-            <td style="display:flex;align-items:center;justify-content:space-between;width:150px">
-              <span onclick="reset('<%=MenuCategory.ids%>');displayEdit('<%=category.id%>')" style="cursor:pointer"> Edit </span>
+            <td style="display:flex;align-items:center;justify-content:space-around;">
+              <span onclick="reset('<%=MenuCategory.ids%>');displayEdit('<%=category.id%>')" style="cursor:pointer;padding:0 12px;" class="btn btn-dark"> Edit </span>
               <%= form_with(url: "/menu_categories/#{category.id}",style:"margin-left:10px;", method: "DELETE") do %>
                 <%= image_submit_tag("delete.png",style:"width:20px",:onclick=>"this.form.submit()") %>
               <% end %>
               <%= link_to category.status,menu_category_path(id:category.id,status:category.status),class:"btn btn-danger",style:"margin-left:10px;padding:0 10px;", method: :put%>
             </td>
           </tr>
-        </div>
         <%= form_with url:"/menu_categories/#{category.id}", method: :put do |form| %>
            <tr id="displayEdit<%=category.id%>" style="display:none">
              <td><%= form.text_field :name, class: "formInput",placeholder: category.name%></td>

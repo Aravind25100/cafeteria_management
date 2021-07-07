@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :ensure_user_logged_in, except: [:edit, :index]
 
+
   def index
     if session[:employee_role] == nil
       session[:employee_role] = "owner"

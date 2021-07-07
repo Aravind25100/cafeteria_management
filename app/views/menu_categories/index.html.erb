@@ -1,13 +1,13 @@
-<div style="display:flex;">
-  <section style="width:100px">
-      <%= link_to "All categories", menu_categories_path(category:"all"),method: :get%><br>
+<div style="display:flex;height:100%;">
+  <section style="width:200px;background:orangered">
+      <%= link_to "All categories", menu_categories_path(category:"all"),class:"list-group-item OrderDetail",method: :get%>
       <%MenuCategory.order("name").all.each do |category|%>
         <div>
-          <%= link_to category.name , menu_categories_path(category:category.id),method: :get %>
+          <%= link_to category.name , menu_categories_path(category:category.id),class:"list-group-item OrderDetail",method: :get %>
         </div>
       <% end %>
   </section>
-  <section class="menu">
+  <section class="menu" style="margin-left:50px;margin-top:2%">
       <% if category == "all" %>
             <%= render partial: "categories" %>
       <% else %>

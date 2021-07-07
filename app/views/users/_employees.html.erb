@@ -1,6 +1,8 @@
-<span class="h3"><%= role.capitalize %>s</span>
-<%= link_to "+" ,add_employees_path(role:role),style:"margin-left:40px;font-weight:600;color:black;font-size:20px",method: :get %>
-<table class="table table-bordered" style="width:100%">
+<div style="display:flex;align-items:center;">
+  <span class="h3" ><%= role.capitalize %>s</span>
+  <%= link_to "Add  #{role.capitalize}",add_employees_path(role:role),class:"btn btn-dark",style:"margin-left:50px;padding:3px 12px",method: :get %>
+</div>
+<table class="table table-borderless" style="width:100%;margin-top:2%;">
   <thead class="thead-light">
     <tr>
       <th scope="col">Employee Name</th>
@@ -19,7 +21,6 @@
              <td><%= user.phone_no %></td>
              <td><%= user.email %></td>
              <td>
-  <%# post "/edit_employees", to: "users#update_employee", as: :update_employees %>
                 <%= link_to "Edit", edit_employees_path(user_id:user.id) %>
                 <%= link_to "Delete","/users/#{user.id}",method: :delete %>
              </td>
@@ -28,3 +29,5 @@
       <% end %>
   </tbody>
 </table>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
