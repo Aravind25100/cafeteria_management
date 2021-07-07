@@ -93,3 +93,14 @@ body {
     background-repeat: no-repeat;
     background-size: 100% 110%;
 }
+
+.form-input {
+    font-weight: 600;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: white;
+}
+
+.form-input:focus {
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+}

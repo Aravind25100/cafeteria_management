@@ -13,8 +13,8 @@
   <tbody>
       <%= form_with url:menu_categories_path, method: :post do |form| %>
         <tr id="display" style="display:none">
-            <td><%= form.text_field :name, class: "formInput",placeholder: "Menu category" %></td>
-            <td><%= form.submit "Create" %></td>
+            <td><%= form.text_field :name, class: "form-control",placeholder: "Menu category" %></td>
+            <td><%= form.submit "Create",style:"margin-left:20px;padding:0 12px",class:"btn btn-success" %></td>
         </tr>
       <% end %>
       <% MenuCategory.order("name").all.each do |category|%>
@@ -30,8 +30,8 @@
           </tr>
         <%= form_with url:"/menu_categories/#{category.id}", method: :put do |form| %>
            <tr id="displayEdit<%=category.id%>" style="display:none">
-             <td><%= form.text_field :name, class: "formInput",placeholder: category.name%></td>
-             <td><%= form.submit "edit" %></td>
+             <td><%= form.text_field :name, class: "form-control",placeholder: category.name%></td>
+             <td><%= form.submit "Change",style:"margin-left:20px;padding:0 12px",class:"btn btn-success" %></td>
            </tr>
         <% end %>
 

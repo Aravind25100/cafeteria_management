@@ -16,11 +16,11 @@
         <tbody>
             <%= form_with url:menu_items_path, method: :post do |form| %>
               <tr id="display" style="display:none">
-                  <td><%= form.text_field :name, class: "formInput",placeholder: "Food Name"  %></td>
+                  <td><%= form.text_field :name, class: "form-control",placeholder: "Food Name"  %></td>
                   <%= hidden_field_tag(:menu_category_id,category.id, class: "formInut")%>
-                  <td><%= form.text_field :description, class: "formInput",placeholder: "Description"  %></td>
-                  <td><%= form.number_field :price,class: "formInput",placeholder: "Price",:step => "0.01"%></td>
-                  <td><%= form.submit "Add" %></td>
+                  <td><%= form.text_field :description, class: "form-control",placeholder: "Description"  %></td>
+                  <td><%= form.number_field :price,class: "form-control",placeholder: "Price",:step => "0.01"%></td>
+                  <td><%= form.submit "Add",style:"margin-left:30px;padding:0 12px",class:"btn btn-success" %></td>
               </tr>
             <% end %>
 
@@ -40,11 +40,11 @@
                   </tr>
                   <%= form_with url:"/menu_items/#{item.id}", method: :put do |form| %>
                     <tr id="displayEdit<%=item.id%>" style="display:none">
-                      <td><%= form.text_field :name, class: "formInput",placeholder: item.name%></td>
+                      <td><%= form.text_field :name, class: "form-control",placeholder: item.name%></td>
                       <%= hidden_field_tag(:menu_category_id,category.id, class: "formInut")%>
-                      <td><%= form.text_field :description, class: "formInput",placeholder: item.description  %></td>
-                      <td><%= form.number_field :price,class: "formInput",placeholder: item.price, :step => "0.01"%></td>
-                      <td><%= form.submit "edit" %></td>
+                      <td><%= form.text_field :description, class: "form-control",placeholder: item.description  %></td>
+                      <td><%= form.number_field :price,class: "form-control",placeholder: item.price, :step => "0.01"%></td>
+                      <td><%= form.submit "Change",style:"margin-left:20px;padding:0 12px",class:"btn btn-success"%></td>
                     </tr>
                   <% end %>
                 </div>

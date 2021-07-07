@@ -6,10 +6,10 @@
   <thead class="thead-light">
     <tr>
       <th scope="col">Employee Name</th>
-      <th scope="col">Address</th>
+      <th scope="col" style="width:200px">Address</th>
       <th scope="col">Phone_no</th>
       <th scope="col">Email</th>
-      <th scope="col">Actions</th>
+      <th scope="col" style="width:150px">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -20,9 +20,11 @@
              <td><%= user.address %></td>
              <td><%= user.phone_no %></td>
              <td><%= user.email %></td>
-             <td>
-                <%= link_to "Edit", edit_employees_path(user_id:user.id) %>
-                <%= link_to "Delete","/users/#{user.id}",method: :delete %>
+             <td style="display:flex;justify-content:space-around">
+                <%= link_to "Edit", edit_employees_path(user_id:user.id),style:"padding:0 12px",class:"btn btn-dark" %>
+                <%= form_with(url: "/users/#{user.id}",style:"margin-left:10px;", method: "DELETE") do %>
+                   <%= image_submit_tag("delete.png",style:"width:20px",:onclick=>"this.form.submit()") %>
+                <% end %>
              </td>
             </tr>
           </div>
