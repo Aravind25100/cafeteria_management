@@ -6,10 +6,10 @@ class ApplicationController < ActionController::Base
     if (request.path == "/menu" or request.path == "/menu/confirm_order" or request.path == "/users/#{session[:current_user_id]}/edit") and current_user.role == "owner"
       redirect_to root_path
     end
-    if (request.path == "/users" or request.path == "/menu_categories" or request.path == "/add_employees" or request.path == "/edit") and (current_user.role == "user")
+    if ((request.path == "/users" and request.get?) or request.path == "/menu_categories" or request.path == "/add_employees" or request.path == "/edit") and (current_user.role == "user")
       redirect_to menu_index_path
     end
-    if (request.path == "/users" or request.path == "/menu_categories" or request.path == "/add_employees" or request.path == "/edit" or request.path == "/users/#{session[:current_user_id]}/edit") and (current_user.role == "clerk")
+    if ((request.path == "/users" and request.get?) or request.path == "/menu_categories" or request.path == "/add_employees" or request.path == "/edit" or request.path == "/users/#{session[:current_user_id]}/edit") and (current_user.role == "clerk")
       redirect_to menu_index_path
     end
   end
