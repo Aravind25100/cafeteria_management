@@ -104,3 +104,8 @@ body {
     background-color: rgba(0, 0, 0, 0);
     color: white;
 }
+
+.sign-up::placeholder,
+.sign-in::placeholder {
+    color: white
+}

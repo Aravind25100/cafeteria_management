@@ -1,11 +1,14 @@
-<h1>Sign in</h1>
-
-<%= form_with url:new_sessions_path,class:"px-4 py-3" do |form| %>
-   <div class="form-group">
-      <%= form.email_field :email, class:"form-control",placeholder: "Email"  %>
+<div style="width:100%;height:100%;background-image:url('/signin.jpeg');background-size:100% 100%">
+   <div style="width:500px;position:absolute;margin:5% 5%">
+      <h1 class="h1" style="color:white">Sign in</h1>
+      <%= form_with url:new_sessions_path,class:"px-4 py-3" do |form| %>
+         <div class="form-group">
+            <%= form.email_field :email, class:"form-control form-input sign-in",placeholder: "Email"  %>
+         </div>
+         <div class="form-group">
+            <%= form.password_field :password, class:"form-control form-input sign-in",placeholder: "Password"  %>
+         </div style="width:20pmargin-left:220px">
+         <%= form.submit "Sign in",style:"width:200px;margin-left:250px",class:"btn btn-success" %>
+      <% end %>
    </div>
-   <div class="form-group">
-      <%= form.password_field :password, class:"form-control",placeholder: "Password"  %>
-   </div>
-   <%= form.submit "Sign in",class:"btn btn-primary" %>
-<% end %>
+</div>

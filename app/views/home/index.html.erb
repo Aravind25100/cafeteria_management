@@ -1,5 +1,9 @@
-<article class="HomePage">
-      <%= link_to "Sign up",new_user_path %>
-      <br>
-      <%= link_to "Sign in",new_sessions_path %>
+<article style="height:100%;background-image:url('homepage_bg.jpg');background-size:100% 100%">
+      <div style="width:500px;height:400px;position:absolute;margin-left:50%;">
+      <h1 style="margin-top:25%;margin-left:20%;color:white;font-size:98px">Food city</h1>
+      <div style="width:400px;margin-top:15%;margin-left:18%;display:flex;justify-content:space-around">
+            <p><%= link_to "Sign up",new_user_path,class:"btn btn-outline-light",style:"padding:12px 40px;" %></p>
+            <p><%= link_to "Sign in",new_sessions_path,class:"btn btn-outline-light",style:"padding:12px 40px;" %></p>
+      </div>
+      </div>
 </article>
