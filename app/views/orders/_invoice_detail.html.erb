@@ -1,5 +1,7 @@
 <h1 class="h1" style="color:grey;margin-bottom:50px">Order Detail</h1>
-<% if invoice_id.present? %>
+<% invoice_there = Invoice.find_by(id:invoice_id)%>
+<% current_user_id = invoice_there ? Order.find(invoice_id).user_id : nil%>
+<% if invoice_there && (current_user_id == session[:current_user_id] || User.find(session[:current_user_id]).role=="owner" || User.find(session[:current_user_id]).role=="clerk") %>
   <div class="cartscroll" >
     <div>
       <% invoices = Invoice.find(invoice_id).order%>
@@ -32,7 +34,7 @@
       <div style="width:200px;margin:0 auto">
         <h1 class="h1"> ------ -- - ---</h1>
         <h1 class="h1"> ------ -- - ---</h1>
-        <h1 class="h1"> ------ -- - ---</h1>
+        <h1 class="h4"> Click the invoice</h1>
         <h1 class="h1"> ------ -- - ---</h1>
         <h1 class="h1"> ------ -- - ---</h1>
       </div>
