@@ -3,7 +3,9 @@ class OrdersController < ApplicationController
     session[:employee_role] = nil
     session[:edit_category] = nil
     render "index", locals: { status: params[:status].present? ? params[:status] : "all",
-                              invoice_id: params[:invoice] ? params[:invoice] : nil }
+                              invoice_id: params[:invoice] ? params[:invoice] : nil,
+                              starting: params[:start] ? params[:start] : nil,
+                              ending: params[:end] ? params[:end] : nil }
   end
 
   def create
