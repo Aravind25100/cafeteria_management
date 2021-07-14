@@ -1,0 +1,64 @@
+<section class="scrollbar">
+     <div>
+      <%= form_with url:order_reports_path,method: :get do %>
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Date range</h5>
+        </div>
+        <div class="modal-body">
+            <div class="form-group" style="display:flex;justify-content:space-around">
+              <span>
+              <%= label_tag :start,"Start : ",class:"col-form-label" %>
+              <%= date_field_tag :start, class:"form-control"%>
+              </span>
+              <span>
+              <%= label_tag :end,"End : ",class:"col-form-label" %>
+              <%= date_field_tag :end, class:"form-control"%>
+              </span>
+              <%= submit_tag "search",class:"btn btn-dark",style:"padding:0 20px"%>
+            </div>
+        </div>
+      <% end %>
+     </div>
+
+      <% if starting!= nil and ending!=nil %>
+          <% reports = {starting.split("-")[1] => nil}  %>
+      <% else %>
+          <% reports = Invoice.all.group_by {|invoice| invoice.created_at.strftime("%m")}%>
+      <% end %>
+
+     <% reports.keys.each do |month|%>
+         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4%">
+             <h1 class="h2" style="margin:5% 5%"><%=Date::MONTHNAMES[month.to_i]%></h1>
+          </div>
+          <div class="card" style="width:600px">
+              <div class="card-header" style="display:flex;justify-content:space-around">
+                <p>Sales report</p>
+              </div>
+              <div class="card-body">
+                  <table class="table" style="text-align:center;">
+                  <thead>
+                     <tr>
+                     <th scope="col">Total orders</th>
+                     <th scope="col">Earnings</th>
+                     <th scope="col">Profit</th>
+                     <th scope="col">Expense</th>
+                     <th scope="col">Delivered orders</th>
+                     <th scope="col">pending orders</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <% invoice_by_month = Invoice.where('extract(month from created_at) = ?',month) %>
+                      <td> <%= invoice_by_month.count%></td>
+                      <td> ₹<%= invoice_by_month.sum(:total_amount)%></td>
+                      <td> ₹<%= invoice_by_month.sum(:total_amount)/2%></td>
+                      <td> ₹<%= invoice_by_month.sum(:total_amount)/2%></td>
+                      <td> <%= Invoice.where('extract(month from created_at) = ? and delivery_status = ? ',month,"delivered").count%></td>
+                      <td> <%= Invoice.where('extract(month from created_at) = ? and delivery_status = ? ',month,"pending").count%></td>
+                     </tr>
+                  </tbody>
+                  </table>
+              </div>
+          </div>
+      <% end %>
+   </section>

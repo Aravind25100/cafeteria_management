@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   root to: "home#index"
   resources :menu_items
   resources :menu_categories
-  resources :orders
   resources :menu
+
+  resources :orders
+  get "/order_reports", to: "orders#reports", as: :order_reports
 
   resources :users
   get "/add_employees", to: "users#add_employees", as: :add_employees
